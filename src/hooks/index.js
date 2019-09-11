@@ -4,6 +4,7 @@ import moment from 'moment';
 import { firebase } from '../firebase';
 import { collatedTasksExist } from '../helpers';
 
+//Hook para pegar as tasks do banco e tratá-las com base no projeto selecionado
 export const useTasks = selectedProject => {
   const [tasks, setTasks] = useState([]);
   const [archivedTasks, setArchivedTasks] = useState([]);
@@ -51,6 +52,7 @@ export const useTasks = selectedProject => {
   return { tasks, archivedTasks };
 };
 
+// Hook para trazer os projetos
 export const useProjects = () => {
   const [projects, setProjects] = useState([]);
 
