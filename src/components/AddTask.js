@@ -1,14 +1,15 @@
-import React, {useState} from 'react'
-import { FaRegListAlt, FaRegCalendarAlt} from 'react-icons/fa'
+import React, { useState } from 'react'
+import { FaRegListAlt, FaRegCalendarAlt } from 'react-icons/fa'
 import moment from 'moment'
 import { firebase } from '../firebase'
-import {useSelectedProjectValue} from '../context'
+import { useSelectedProjectValue } from '../context'
 import { ProjectOverlay } from './ProjectOverlay'
+import { TaskDate } from './TaskDate'
 
 export const AddTask = ({
-    showAddTaskMain=true, 
-    shouldShowMain=false, 
-    showQuickAddTask, 
+    showAddTaskMain = true,
+    shouldShowMain = false,
+    showQuickAddTask,
     setShowQuickAddTask
 }) => {
     const [task, setTask] = useState('')
@@ -16,7 +17,7 @@ export const AddTask = ({
     const [project, setProject] = useState('')
     const [showMain, setShowMain] = useState(shouldShowMain)
     const [showProjectOverlay, setShowProjectOverlay] = useState(false)
-    const [ShowTaskDate, setShowTaskDate] = useState(false)
+    const [showTaskDate, setShowTaskDate] = useState(false)
 
     const { selectedProject } = useSelectedProjectValue();
 
@@ -24,17 +25,17 @@ export const AddTask = ({
         const projectId = project || selectedProject
         let collatedDate = ''
 
-        if (projectId === 'TODAY'){
+        if (projectId === 'TODAY') {
             collatedDate = moment().format('DD/MM/YYYY')
-        } else if (projectId === 'NEXT_7'){
+        } else if (projectId === 'NEXT_7') {
             collatedDate = moment()
                 .add(7, 'days')
                 .format('DD/MM/YYYY')
         }
 
         return (
-            task && 
-            projectId && 
+            task &&
+            projectId &&
             firebase
                 .firestore()
                 .collection('tasks')
@@ -67,7 +68,7 @@ export const AddTask = ({
                 >
                     <span className="add-task__plus">+</span>
                     <span className="add-task__text">Add Task</span>
-                </div>  
+                </div>
             )}
 
             {((showMain) || showQuickAddTask) && (
@@ -89,16 +90,20 @@ export const AddTask = ({
                                     }}
                                 >
                                     X
-                                </span>   
-                            </div> 
+                                </span>
+                            </div>
                         </>
                     )}
-                    <ProjectOverlay 
-                        setProject={setProject} 
+                    <ProjectOverlay
+                        setProject={setProject}
                         showProjectOverlay={showProjectOverlay}
                         setShowProjectOverlay={setShowProjectOverlay}
                     />
-                    <p>TaskDate here</p>
+                    <TaskDate
+                        setTaskDate={setTaskDate}
+                        showTaskDate={showTaskDate}
+                        setShowTaskDate={setShowTaskDate}
+                    />
                     <input
                         className="add-task__content"
                         data-testid="add-task-content"
@@ -110,7 +115,11 @@ export const AddTask = ({
                         type="button"
                         className="add-task__submit"
                         data-testid="add-task"
-                        onClick={() => addTask()}
+                        onClick={() => 
+                            showQuickAddTask 
+                                ? addTask() && setShowQuickAddTask(false)
+                                : addTask()
+                        }
                     >
                         Add Task
                     </button>
@@ -136,9 +145,9 @@ export const AddTask = ({
                     <span
                         className="add-task__date"
                         data-testid="show-task-date-overlay"
-                        onClick={() => setShowTaskDate(!ShowTaskDate)}
+                        onClick={() => setShowTaskDate(!showTaskDate)}
                     >
-                        <FaRegCalendarAlt/>
+                        <FaRegCalendarAlt />
                     </span>
                 </div>
             )}

@@ -26,7 +26,9 @@ export const Projects = ({activeValue = true}) => {
                     setSelectedProject(project.projectId)
                 }}
             >
-                <IndividualProject project={project}/>
+                <button>
+                    <IndividualProject project={project}/>
+                </button>
             </li>
         ))
     )
