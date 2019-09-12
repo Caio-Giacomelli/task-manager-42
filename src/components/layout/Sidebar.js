@@ -18,7 +18,7 @@ export const Sidebar = () => {
         <div className="sidebar" data-testid="sidebar">
             <ul className="sidebar__generic">
                 <li
-                    data-testId="inbox"
+                    data-testid="inbox"
                     className={active === 'inbox' ? 'active' : undefined}
                     onClick={() => {
                         setActive('inbox')
@@ -31,7 +31,7 @@ export const Sidebar = () => {
                     <span>Inbox</span>
                 </li>
                 <li
-                    data-testId="today"
+                    data-testid="today"
                     className={active === 'today' ? 'active' : undefined}
                     onClick={() => {
                         setActive('today')
@@ -44,7 +44,7 @@ export const Sidebar = () => {
                     <span>Today</span>
                 </li>
                 <li
-                    data-testId="next_7"
+                    data-testid="next_7"
                     className={active === 'next_7' ? 'active' : undefined}
                     onClick={() => {
                         setActive('next_7')
