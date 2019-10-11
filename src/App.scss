@@ -265,9 +265,6 @@
      }
    
      li {
-      padding-left: 10px;
-      padding-right: 15px;
-
       &:hover .sidebar__project-delete{
         display: flex;
         @include va();
@@ -275,10 +272,12 @@
      }
    
      &__project {
-        padding: 5px 0;
-        cursor: pointer;
-
-        div:nth-child(1){
+       cursor: pointer;
+       
+       div:nth-child(1){
+          padding: 5px 0;
+          padding-left: 15px;
+          padding-right: 10px;
           width: 100%;
           display: flex;
           align-items: center;  
@@ -365,23 +364,33 @@
       
       &__generic {
         li {
-          padding: 10px 0 10px 10px;
           list-style-type: none;
           color: #333;
           display:flex;
           cursor: pointer;
           line-height: 1.50;
           font-size: 15px;
+          padding-left: 0;
+          padding-right: 0;
 
-          span:first-of-type {
-            margin-right: 10px;
+          div:nth-child(1){
+            display: flex;
+            padding: 10px 0 10px 10px;
+            width: 100%;
 
-            svg {
-              width: 18px;
-              height: 18px;
-              color: #555;
-            }
+            span:first-of-type {
+              margin-right: 10px;
+              display: flex;
+              align-items: center;
+
+              svg {
+                width: 18px;
+                height: 18px;
+                color: #555;
+              }
+            }         
           }
+
           &.active, &:hover {
             font-weight: bold;
             background-color: white;
@@ -610,24 +619,32 @@
    
    /* Task Date
      ============================================ */
-   .task-date {
+  .task-date {
      @include box-overlay();
      background-color: #fff;
      width: 200px;
      right: 0;
    
       &__list li {
-       @include task-item();
-   
-      span:first-of-type {
-        margin-right: 10px;
+        @include task-item();
+        padding: 0;
+        
+        div:nth-child(1){
+          padding: 10px;
+          width: 100%; 
+          display: flex;
+          align-items: center; 
 
-        svg {
-          fill: grey;
+          span:first-of-type {
+            margin-right: 10px;
+  
+            svg {
+              fill: grey;
+            }
+          }
         }
       }
     }
-  }
    
    /* Project Overlay
      ============================================ */
@@ -641,7 +658,13 @@
      }
    
      &__list li {
-       @include task-item();
+        @include task-item();
+        padding: 0;
+
+        div:nth-child(1){
+          width: 100%;
+          padding: 10px;
+        }
      }
    }
    
