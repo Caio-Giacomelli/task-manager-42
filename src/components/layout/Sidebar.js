@@ -19,16 +19,26 @@ export const Sidebar = () => {
             <ul className="sidebar__generic">
                 <li
                     data-testid="inbox"
-                    className={active === 'inbox' ? 'active' : undefined}
-                    onClick={() => {
-                        setActive('inbox')
-                        setSelectedProject('INBOX')
-                    }}
+                    className={active === 'inbox' ? 'active' : undefined}                  
                 >
-                    <span>
-                        <FaInbox/>
-                    </span>
-                    <span>Inbox</span>
+                    <div
+                        tabIndex={0}
+                        role="button"
+                        onClick={() => {
+                            setActive('inbox')
+                            setSelectedProject('INBOX')
+                        }}
+                        onKeyDown={() => {
+                            setActive('inbox')
+                            setSelectedProject('INBOX')
+                        }}
+                    >
+                        
+                        <span>
+                            <FaInbox/>
+                        </span>
+                        <span>Inbox</span>                   
+                    </div>
                 </li>
                 <li
                     data-testid="today"
